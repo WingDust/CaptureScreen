@@ -148,7 +148,7 @@ Function Get-ExtendedProperties
         ForEach( $property in $properties )
         {
             $index = $propertiesToIndex[ $property ]
-            If( $index -ne $null )
+            If( $null -ne $index )
             {
                 $myFolder.GetDetailsOf( $myFile , $index -as [int] )
             }
