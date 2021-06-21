@@ -177,6 +177,7 @@ fn webp() {
 
 /// Reference:
 ///   - [How would I check if a directory is empty in Rust?](https://stackoverflow.com/questions/56744383/how-would-i-check-if-a-directory-is-empty-in-rust)
+///   - [Filtering files or directories discovered with fs::read_dir()](https://stackoverflow.com/questions/58062887/filtering-files-or-directories-discovered-with-fsread-dir)
 #[allow(dead_code)]
 #[allow(unused_must_use)]
 fn checkname() -> String {
