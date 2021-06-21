@@ -1,12 +1,10 @@
 extern crate hotkey;
-// extern crate winapi_util;
-// extern crate winapi;
 
 // use libloading::{Library,Symbol};
 
 #[allow(unused_imports)]
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 #[allow(unused_imports)]
 use std::thread;
 use std::{
@@ -37,10 +35,7 @@ fn main() {
         // thread::sleep(Duration::from_millis(500));
     });
     t2.join().unwrap();
-    // let file = match fs::File::open("H:/backupRecord/b.mp4"){
-    //     Err(why) => println!("{}",why.to_string()),
-    //     Ok(_) => println!("ok"),
-    // };
+    // 停止主线程以等待文件生成完毕
     thread::sleep(Duration::from_secs(3));
     let t3 = thread::spawn(move || {
         webp();
@@ -182,35 +177,36 @@ fn webp() {
 
 /// Reference:
 ///   - [How would I check if a directory is empty in Rust?](https://stackoverflow.com/questions/56744383/how-would-i-check-if-a-directory-is-empty-in-rust)
-#[test]
 #[allow(dead_code)]
 #[allow(unused_must_use)]
 fn checkname() -> String {
-    // 
     let isempty = fs::read_dir("h:/image/PracticeBlender/")
         .unwrap()
         .next()
         .is_none();
     if isempty {
-        // assert_eq!(numname(None), "000000");
         return numname(None);
     }
-    fs::read_dir("h:/image/PracticeBlender/")
-        .unwrap()
-        .into_iter()
-        .map(|x| {
-            x.map(|entry| {
-                println!("2");
-                let file_name = entry.file_name();
-                println!("{:?}", file_name);
-            })
-        });
-    // assert_eq!("1", "1");
-    "1".to_string()
+    let i = fs::read_dir("h:/image/PracticeBlender/").unwrap();
+    // println!("{:?}", i.into_iter().filter(|r|r.is_ok()));
+    let mut c:Vec<PathBuf> = i.into_iter()
+    .filter(|r|r.is_ok())
+    .map(|r|r.unwrap().path())
+    .filter(|r|r.is_file())
+    .collect();
+
+    let n = c.pop().unwrap()
+    .as_path()
+    .file_stem().unwrap()
+    .to_str().unwrap()
+    .parse::<u32>().unwrap();
+    numname(Some(n))
 }
 
+/// Reference:
+///   - [https://github.com/rust-lang/rust/issues/43301](file:///E:/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
 #[test]
-fn file() {
+fn test() {
     println!(
         "{}",
         format!("h:/image/PracticeBlender/{}.webp", "0000".to_string())
