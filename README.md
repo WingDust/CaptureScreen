@@ -56,6 +56,7 @@
     - [taglib-sharp](https://github.com/mono/taglib-sharp)
     - [TagLib Audio Meta-Data Library](https://taglib.org/)
     - [itext7-dotnet](https://github.com/itext/itext7-dotnet) (pdf)
+    - [Screencast-Keys](https://github.com/nutti/Screencast-Keys) 做为替换方案
 
 
 

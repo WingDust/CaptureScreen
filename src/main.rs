@@ -1,3 +1,5 @@
+// 隐藏控制台
+#![windows_subsystem = "windows"]
 extern crate hotkey;
 
 // use libloading::{Library,Symbol};
@@ -47,9 +49,9 @@ fn main() {
 }
 
 /// Reference:
-///   - [Virtual-Key Codes](https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
-///   - [RegisterHotKey function](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey)
-///   - [How to register a single or multiple global hotkeys for a single key in Winforms](https://ourcodeworld.com/articles/read/573/how-to-register-a-single-or-multiple-global-hotkeys-for-a-single-key-in-winforms)
+/// - [Virtual-Key Codes](https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)
+/// - [RegisterHotKey function](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey)
+/// - [How to register a single or multiple global hotkeys for a single key in Winforms](https://ourcodeworld.com/articles/read/573/how-to-register-a-single-or-multiple-global-hotkeys-for-a-single-key-in-winforms)
 #[allow(dead_code)]
 #[allow(unused_variables)]
 fn key(tx: mpsc::Sender<i32>) {
@@ -148,7 +150,7 @@ fn numname(n: Option<u32>) -> String {
 }
 
 /// Reference:
-///   - [Is there a way to force print!/println! to use a Windows new line (CR LF)](https://stackoverflow.com/questions/37558353/is-there-a-way-to-force-print-println-to-use-a-windows-new-line-cr-lf)
+/// - [Is there a way to force print!/println! to use a Windows new line (CR LF)](https://stackoverflow.com/questions/37558353/is-there-a-way-to-force-print-println-to-use-a-windows-new-line-cr-lf)
 #[allow(dead_code)]
 #[allow(unused_macros)]
 macro_rules! wprintln {
@@ -176,8 +178,8 @@ fn webp() {
 }
 
 /// Reference:
-///   - [How would I check if a directory is empty in Rust?](https://stackoverflow.com/questions/56744383/how-would-i-check-if-a-directory-is-empty-in-rust)
-///   - [Filtering files or directories discovered with fs::read_dir()](https://stackoverflow.com/questions/58062887/filtering-files-or-directories-discovered-with-fsread-dir)
+/// - [How would I check if a directory is empty in Rust?](https://stackoverflow.com/questions/56744383/how-would-i-check-if-a-directory-is-empty-in-rust)
+/// - [Filtering files or directories discovered with fs::read_dir()](https://stackoverflow.com/questions/58062887/filtering-files-or-directories-discovered-with-fsread-dir)
 #[allow(dead_code)]
 #[allow(unused_must_use)]
 fn checkname() -> String {
@@ -190,22 +192,28 @@ fn checkname() -> String {
     }
     let i = fs::read_dir("h:/image/PracticeBlender/").unwrap();
     // println!("{:?}", i.into_iter().filter(|r|r.is_ok()));
-    let mut c:Vec<PathBuf> = i.into_iter()
-    .filter(|r|r.is_ok())
-    .map(|r|r.unwrap().path())
-    .filter(|r|r.is_file())
-    .collect();
+    let mut c: Vec<PathBuf> = i
+        .into_iter()
+        .filter(|r| r.is_ok())
+        .map(|r| r.unwrap().path())
+        .filter(|r| r.is_file())
+        .collect();
 
-    let n = c.pop().unwrap()
-    .as_path()
-    .file_stem().unwrap()
-    .to_str().unwrap()
-    .parse::<u32>().unwrap();
+    let n = c
+        .pop()
+        .unwrap()
+        .as_path()
+        .file_stem()
+        .unwrap()
+        .to_str()
+        .unwrap()
+        .parse::<u32>()
+        .unwrap();
     numname(Some(n))
 }
 
 /// Reference:
-///   - [https://github.com/rust-lang/rust/issues/43301](file:///E:/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
+/// - [https://github.com/rust-lang/rust/issues/43301](file:///E:/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html)
 #[test]
 fn test() {
     println!(
@@ -221,4 +229,8 @@ fn test() {
     //    let lib =  Library::new("./TagLibSharp.dll").unwrap();
     //    lib.get(b"Create");
     // }
+}
+
+fn aaa(){
+    
 }
